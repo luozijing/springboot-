@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.students.springbootstu.dao.TbStudentDao">
+
+    <resultMap type="com.students.springbootstu.entity.TbStudent" id="TbStudentMap">
+        <result property="stuid" column="stuId" jdbcType="INTEGER"/>
+        <result property="stuname" column="stuName" jdbcType="VARCHAR"/>
+        <result property="stusex" column="stuSex" jdbcType="BOOLEAN"/>
+        <result property="stubirth" column="stuBirth" jdbcType="TIMESTAMP"/>
+        <result property="stutel" column="stuTel" jdbcType="VARCHAR"/>
+        <result property="stuadr" column="stuAdr" jdbcType="VARCHAR"/>
+        <result property="stuphoto" column="stuPhoto" jdbcType="LONGVARBINARY"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TbStudentMap">
+        select
+          stuId, stuName, stuSex, stuBirth, stuTel, stuAdr, stuPhoto
+        from student.tb_student
+        where stuId = #{stuid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TbStudentMap">
+        select
+          stuId, stuName, stuSex, stuBirth, stuTel, stuAdr, stuPhoto
+        from student.tb_student
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TbStudentMap">
+        select
+          stuId, stuName, stuSex, stuBirth, stuTel, stuAdr, stuPhoto
+        from student.tb_student
+        <where>
+            <if test="stuid != null">
+                and stuId = #{stuid}
+            </if>
+            <if test="stuname != null and stuname != ''">
+                and stuName = #{stuname}
+            </if>
+            <if test="stusex != null">
+                and stuSex = #{stusex}
+            </if>
+            <if test="stubirth != null">
+                and stuBirth = #{stubirth}
+            </if>
+            <if test="stutel != null and stutel != ''">
+                and stuTel = #{stutel}
+            </if>
+            <if test="stuadr != null and stuadr != ''">
+                and stuAdr = #{stuadr}
+            </if>
+            <if test="stuphoto != null">
+                and stuPhoto = #{stuphoto}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="stuid" useGeneratedKeys="true">
+        insert into student.tb_student(stuName, stuSex, stuBirth, stuTel, stuAdr, stuPhoto)
+        values (#{stuname}, #{stusex}, #{stubirth}, #{stutel}, #{stuadr}, #{stuphoto})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update student.tb_student
+        <set>
+            <if test="stuname != null and stuname != ''">
+                stuName = #{stuname},
+            </if>
+            <if test="stusex != null">
+                stuSex = #{stusex},
+            </if>
+            <if test="stubirth != null">
+                stuBirth = #{stubirth},
+            </if>
+            <if test="stutel != null and stutel != ''">
+                stuTel = #{stutel},
+            </if>
+            <if test="stuadr != null and stuadr != ''">
+                stuAdr = #{stuadr},
+            </if>
+            <if test="stuphoto != null">
+                stuPhoto = #{stuphoto},
+            </if>
+        </set>
+        where stuId = #{stuid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from student.tb_student where stuId = #{stuid}
+    </delete>
+
+</mapper>

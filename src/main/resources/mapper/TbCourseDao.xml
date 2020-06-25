@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.students.springbootstu.dao.TbCourseDao">
+
+    <resultMap type="com.students.springbootstu.entity.TbCourse" id="TbCourseMap">
+        <result property="cosid" column="cosId" jdbcType="INTEGER"/>
+        <result property="cosname" column="cosName" jdbcType="VARCHAR"/>
+        <result property="coscredit" column="cosCredit" jdbcType="INTEGER"/>
+        <result property="cosintro" column="cosIntro" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TbCourseMap">
+        select
+          cosId, cosName, cosCredit, cosIntro
+        from student.tb_course
+        where cosId = #{cosid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TbCourseMap">
+        select
+          cosId, cosName, cosCredit, cosIntro
+        from student.tb_course
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TbCourseMap">
+        select
+          cosId, cosName, cosCredit, cosIntro
+        from student.tb_course
+        <where>
+            <if test="cosid != null">
+                and cosId = #{cosid}
+            </if>
+            <if test="cosname != null and cosname != ''">
+                and cosName = #{cosname}
+            </if>
+            <if test="coscredit != null">
+                and cosCredit = #{coscredit}
+            </if>
+            <if test="cosintro != null and cosintro != ''">
+                and cosIntro = #{cosintro}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="cosid" useGeneratedKeys="true">
+        insert into student.tb_course(cosName, cosCredit, cosIntro)
+        values (#{cosname}, #{coscredit}, #{cosintro})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update student.tb_course
+        <set>
+            <if test="cosname != null and cosname != ''">
+                cosName = #{cosname},
+            </if>
+            <if test="coscredit != null">
+                cosCredit = #{coscredit},
+            </if>
+            <if test="cosintro != null and cosintro != ''">
+                cosIntro = #{cosintro},
+            </if>
+        </set>
+        where cosId = #{cosid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from student.tb_course where cosId = #{cosid}
+    </delete>
+
+</mapper>
