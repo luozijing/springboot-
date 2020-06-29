@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>login</title>
+    <meta content="text/html;charset=UTF-8"/>
+    <link th:href="@{bootstrap/css/bootstrap.css}" rel="stylesheet" >
+    <link th:href="@{css/sticky-footer.css}" rel="stylesheet">
+    <link th:href="@{css/login.css}" rel="stylesheet">
+    <script th:src="@{scripts/jQuery3.15min.js}" type="text/javascript"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script  th:src="@{bootstrap/js/bootstrap.js}" type="text/javascript"></script>
+</head>
+<body>
+<!--nav-->
+<div th:replace="common::topbar"></div>
+<!-- body -->
+<div class="container">
+    <div class="text-center">
+        <form class="form-signin" th:action="@{/login}" method="post">
+            <img class="mb-4"  alt="" width="72" height="72"  th:src="@{images/bootstrap-solid.svg}">
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <label for="username" class="sr-only" >Email address</label>
+            <input  id="username" class="form-control" name="username" placeholder="account" required autofocus>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="Password" name="password" required>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+        </form>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

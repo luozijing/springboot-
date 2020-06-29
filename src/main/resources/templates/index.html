@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>login</title>
+    <meta content="text/html;charset=UTF-8"/>
+    <link th:href="@{bootstrap/css/bootstrap.css}" rel="stylesheet" >
+    <link th:href="@{css/sticky-footer.css}" rel="stylesheet">
+    <script th:src="@{scripts/jQuery3.15min.js}" type="text/javascript"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script  th:src="@{bootstrap/js/bootstrap.js}" type="text/javascript"></script>
+</head>
+<body>
+
+    <div th:replace="common::topbar"></div>
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0" >
+        <div class="container">
+            <h1 class="mt-5">Sticky footer with fixed navbar</h1>
+            <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>main &gt; .container</code>.</p><!-- 用户类型为 ROLE_USER 显示 -->
+            <p class="bg-info" th:text="${msg.data}" sec:authorize="hasRole('ROLE_role2')"></p>
+            <!-- 用户类型为 ROLE_USER 显示 -->
+            <p class="bg-info"  sec:authorize="hasRole('ROLE_role1')">role1：无更多信息显示</p>
+        </div>
+
+    </main>
+
+    <div th:replace="common::bottombar"></div>
+
+</body>
+</html>

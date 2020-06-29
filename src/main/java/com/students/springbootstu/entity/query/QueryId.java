@@ -10,4 +10,5 @@ public class QueryId {
     @NotNull(message = "用户id不能为空")
     @Pattern(regexp = "[0-9]*", message = "必须输入数字查询")
     String id;
+
 }

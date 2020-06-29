@@ -82,9 +82,10 @@ public class GlobalControllerExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
     public ResponseResult<Integer> handleUnKnownException(Exception ex){
         TbException log = new TbException(new Date(), ExceptionUtils.getStackTrace(ex));
-        int id = tbExceptionService.insert(log);
-        ResponseResult<Integer> result = ResponseResult.unknownError("服务器异常" + id);
-        result.setData(id);
+        System.out.print(ExceptionUtils.getStackTrace(ex));
+        int id = tbExceptionService.insert(log); //返回1表示成功
+        ResponseResult<Integer> result = ResponseResult.unknownError("服务器异常" + log.getId());
+        result.setData(log.getId());
         return result;
     }
 }

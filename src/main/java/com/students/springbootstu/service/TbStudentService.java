@@ -1,5 +1,7 @@
 package com.students.springbootstu.service;
 
+import com.students.springbootstu.common.page.PageRequest;
+import com.students.springbootstu.common.page.PageResult;
 import com.students.springbootstu.entity.TbStudent;
 import java.util.List;
 
@@ -27,6 +29,20 @@ public interface TbStudentService {
      * @return 对象列表
      */
     List<TbStudent> queryAllByLimit(int offset, int limit);
+
+    /**
+     * 查询全部数据
+     *
+     * @return 对象列表
+     */
+    List<TbStudent> queryAll();
+
+    /**
+     * 分页查询数据
+     *
+     * @return 对象列表
+     */
+    PageResult queryByPages(PageRequest pageRequest);
 
     /**
      * 新增数据

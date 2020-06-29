@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.students.springbootstu.dao.TbStupwdDao">
+
+    <resultMap type="com.students.springbootstu.entity.TbStupwd" id="TbStupwdMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="stuid" column="stuId" jdbcType="INTEGER"/>
+        <result property="stuaccount" column="stuAccount" jdbcType="VARCHAR"/>
+        <result property="stupwd" column="stuPwd" jdbcType="VARCHAR"/>
+        <result property="role" column="role" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TbStupwdMap">
+        select
+          id, stuId, stuAccount, stuPwd, role
+        from student.tb_stupwd
+        where id = #{id}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryByAccount" resultMap="TbStupwdMap">
+        select
+          id, stuId, stuAccount, stuPwd, role
+        from student.tb_stupwd
+        where stuAccount = #{account}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TbStupwdMap">
+        select
+          id, stuId, stuAccount, stuPwd, role
+        from student.tb_stupwd
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TbStupwdMap">
+        select
+          id, stuId, stuAccount, stuPwd, role
+        from student.tb_stupwd
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="stuid != null">
+                and stuId = #{stuid}
+            </if>
+            <if test="stuaccount != null and stuaccount != ''">
+                and stuAccount = #{stuaccount}
+            </if>
+            <if test="stupwd != null and stupwd != ''">
+                and stuPwd = #{stupwd}
+            </if>
+            <if test="role != null and role != ''">
+                and role = #{role}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into student.tb_stupwd(stuId, stuAccount, stuPwd, role)
+        values (#{stuid}, #{stuaccount}, #{stupwd}, #{role})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update student.tb_stupwd
+        <set>
+            <if test="stuid != null">
+                stuId = #{stuid},
+            </if>
+            <if test="stuaccount != null and stuaccount != ''">
+                stuAccount = #{stuaccount},
+            </if>
+            <if test="stupwd != null and stupwd != ''">
+                stuPwd = #{stupwd},
+            </if>
+            <if test="role != null and role != ''">
+                role = #{role},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from student.tb_stupwd where id = #{id}
+    </delete>
+
+</mapper>

@@ -34,7 +34,7 @@ public class LogRespectRecord {
 
     //根据信息等级打印日志
     private void printLog(String argDesc, LogAspect logAspect, Object args){
-        String level = logAspect.level().toLowerCase();
+        String level = logAspect.level().toUpperCase();
         String value = logAspect.value(); //获取注释类信息
 
         if(StringUtils.isNotEmpty(value)){
@@ -49,22 +49,22 @@ public class LogRespectRecord {
                 break;
             case"DEBUG":
                 if(log.isDebugEnabled()){
-                    log.trace(argDesc + JSONUtil.toJsonString(args));
+                    log.debug(argDesc + JSONUtil.toJsonString(args));
                 }
                 break;
             case"INFO":
                 if(log.isInfoEnabled()){
-                    log.trace(argDesc + JSONUtil.toJsonString(args));
+                    log.info(argDesc + JSONUtil.toJsonString(args));
                 }
                 break;
             case"WARN":
                 if(log.isWarnEnabled()){
-                    log.trace(argDesc + JSONUtil.toJsonString(args));
+                    log.warn(argDesc + JSONUtil.toJsonString(args));
                 }
                 break;
             case"ERROR":
                 if(log.isErrorEnabled()){
-                    log.trace(argDesc + JSONUtil.toJsonString(args));
+                    log.error(argDesc + JSONUtil.toJsonString(args));
                 }
                 break;
 

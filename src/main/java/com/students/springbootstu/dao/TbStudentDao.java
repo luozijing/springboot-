@@ -34,12 +34,19 @@ public interface TbStudentDao {
 
 
     /**
-     * 通过实体作为筛选条件查询
-     *
-     * @param tbStudent 实例对象
+     * 查询全部对象
      * @return 对象列表
      */
-    List<TbStudent> queryAll(TbStudent tbStudent);
+    List<TbStudent> queryAll( );
+
+
+    /**
+     * 分页查询对象
+     * @return 对象列表
+     */
+    List<TbStudent> queryByPages( );
+
+
 
     /**
      * 新增数据

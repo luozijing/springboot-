@@ -1,19 +1,20 @@
 package com.students.springbootstu.controller;
 
+import com.students.springbootstu.common.ResponseResult;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class HelloWorld {
 
-    @RequestMapping("/")
-    String home() {
-        return "Hello World2!";
+    @GetMapping("/")
+    String home(Model model) {
+
+        model.addAttribute("msg", ResponseResult.error("该部分只对权限Role_role2有效"));
+        return "index";
     }
 
     @RequestMapping("/hello")

@@ -12,6 +12,10 @@
         <result property="stuphoto" column="stuPhoto" jdbcType="LONGVARBINARY"/>
     </resultMap>
 
+    <sql id = "Base_Column_List">
+          stuId, stuName, stuSex, stuBirth, stuTel, stuAdr, stuPhoto
+    </sql>
+
     <!--查询单个-->
     <select id="queryById" resultMap="TbStudentMap">
         select
@@ -43,19 +47,14 @@
             <if test="stusex != null">
                 and stuSex = #{stusex}
             </if>
-            <if test="stubirth != null">
-                and stuBirth = #{stubirth}
-            </if>
-            <if test="stutel != null and stutel != ''">
-                and stuTel = #{stutel}
-            </if>
-            <if test="stuadr != null and stuadr != ''">
-                and stuAdr = #{stuadr}
-            </if>
-            <if test="stuphoto != null">
-                and stuPhoto = #{stuphoto}
-            </if>
         </where>
+    </select>
+
+    <!--分页查询-->
+    <select id="queryByPages" resultMap="TbStudentMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from student.tb_student
     </select>
 
     <!--新增所有列-->
